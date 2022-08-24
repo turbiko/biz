@@ -25,10 +25,10 @@
     {% endif %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body class="{% block body_class %}{% endblock body_class %}">
         {% wagtailuserbar %}
 
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock content %}
 
         {# Global javascript #}
         {# Global javascript #}

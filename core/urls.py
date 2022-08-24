@@ -1,4 +1,9 @@
+from django.urls import re_path as url
+
 from django.conf import settings
+
+from django.views.static import serve
+
 from django.urls import include, path
 from django.contrib import admin
 
@@ -9,6 +14,10 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 
 urlpatterns = [
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
