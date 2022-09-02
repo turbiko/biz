@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags  %}
+
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/project.css' %}"/>{% endblock extra_css %}
+
+
+{% block content %}
+<!-- Project description section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+
+                    <div class="col-md-12">
+                        <div class="small mb-1">Started: {{ page.article_date }}</div>
+                        <h1 class="display-5 fw-bolder">{{ page.title }}</h1>
+                        <div class="fs-5 mb-5">
+                            <span>author {{ page.author.username }}</span>
+                        </div>
+                        <p class="lead">{{ page.description|richtext }}</p>
+
+                    </div>
+                </div>
+            </div>
+        </section> <!-- END Project description section-->
+
+
+
+{% endblock content %}
