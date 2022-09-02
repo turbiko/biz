@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 from wagtail.core.fields import RichTextField
 from wagtail.fields import StreamField
 from wagtail.models import Page
@@ -15,7 +16,6 @@ from wagtail.admin.edit_handlers import (
 
 from streams import blocks
 
-# Create your models here.
 
 class Project(Page):
     image = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.PROTECT,
@@ -42,3 +42,9 @@ class Project(Page):
         StreamFieldPanel("parameters"),
         StreamFieldPanel("social_data"),
     ]
+
+class ProjectNews(Page):
+
+    teaser_image = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.PROTECT,
+                              related_name="project_news_image")
+    news_text = RichTextField(_('news content'))

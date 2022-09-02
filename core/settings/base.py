@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-DEBUG = False
+DEBUG = True
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -49,12 +49,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'wagtail_localize',  # localization
     'wagtail_localize.locales',  # localization
-]
 
-INSTALLED_APPS += [
     'menus.apps.MenusConfig',
     'project.apps.ProjectConfig',
+    'streams',
 ]
+
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -164,23 +164,20 @@ STATICFILES_FINDERS = [
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
 # JavaScript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
 # See https://docs.djangoproject.com/en/4.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
-# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
-
-# https://www.youtube.com/watch?v=4E0iapNksNY&ab_channel=CoderWebsite
-if DEBUG:
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "static"),
-    ]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-
+# https://www.youtube.com/watch?v=4E0iapNksNY&ab_channel=CoderWebsite
+# if DEBUG:
+#     STATICFILES_DIRS = [
+#         os.path.join(BASE_DIR, "static"),
+#     ]
+# else:
+#     STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Wagtail settings
 
@@ -243,7 +240,8 @@ WAGTAILDOCS_CONTENT_TYPES = {
     'txt': 'text/plain',
 }
 
-WAGTAILDOCS_EXTENSIONS = ['pdf', 'docx']
+
+WAGTAILDOCS_EXTENSIONS = ['pdf', 'docx', 'png', 'jpg', 'tiff', 'mp4']
 
 WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = EMAIL_HOST_USER
 

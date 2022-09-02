@@ -1,4 +1,6 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static i18n wagtailcore_tags wagtailuserbar menus_tags %}
+{# https://docs.wagtail.org/en/v2.12/advanced_topics/i18n.html#wagtail-s-approach-to-multi-lingual-content #}
+{% get_menu "main" as navigation %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,20 +20,65 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
+<link rel="stylesheet" href="{% static 'css/core.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/footer.css'%}"/> {# https://bootstrapious.com/p/bootstrap-footer-bottom #}
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
+        {% endblock extra_css %}
     {% endif %}
     </head>
 
     <body class="{% block body_class %}{% endblock body_class %}">
         {% wagtailuserbar %}
-
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a href="/" class="navbar-brand">B2B Film.ua</a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="#" class="nav-item nav-link active">Home</a>
+                <a href="#" class="nav-item nav-link">Services</a>
+                <a href="#" class="nav-item nav-link">About</a>
+                <a href="#" class="nav-item nav-link">Contact</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                {% if request.user.is_authenticated %}
+                <a href="#" class="nav-item nav-link">Profile</a>
+                <a href="#" class="nav-item nav-link">Logout</a>
+                    {% else %}
+                <a href="#" class="nav-item nav-link">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+{% endblock navbar %}
+<div class="container">
         {% block content %}{% endblock content %}
 
         {# Global javascript #}
-        {# Global javascript #}
+{% block footer %}
+        <hr>
+    <footer>
+        <div class="row">
+            <div class="col-md-6">
+                <p>Copyright &copy; {% now 'Y' %} Film.ua Group</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="text-dark">Terms of Use</a>
+                <span class="text-muted mx-2">|</span>
+                <a href="#" class="text-dark">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+{% endblock footer %}
 
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
