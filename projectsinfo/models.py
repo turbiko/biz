@@ -91,5 +91,4 @@ class ProjectAllNews(Page):
     parent_page_types = ['home.HomePage']
     subpage_types = []
     page_description = "All projects news"
-    class Meta:
-        ordering = ['date']
+
