@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import activate, gettext_lazy as _
@@ -27,7 +28,7 @@ class ProjectGenres(Orderable):
 
 
 class Project(Page):
-    template = 'projectsinfo\project.html'
+    template = 'projectsinfo'+os.sep+'project.html'
     parent_page_types = ['Projects']
     subpage_types = ['ProjectNews']
     date = models.DateField(auto_now_add=False,  blank=True, null=True)
@@ -54,14 +55,14 @@ class Project(Page):
         ordering = ['date']
 
 class Projects(Page):
-    template = 'projectsinfo\projects.html'
+    template = 'projectsinfo'+os.sep+'projects.html'
     subpage_types = ['Project']
     parent_page_types = ['home.HomePage']
     page_description = "Projects index page"
 
 
 class ProjectNews(Page):
-    template = 'projectsinfo\project_news.html'
+    template = 'projectsinfo'+os.sep+'project_news.html'
     parent_page_types = ['Project']
     subpage_types = []
     page_description = "current project news"
