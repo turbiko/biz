@@ -2,7 +2,7 @@ from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+CSRF_TRUSTED_ORIGINS = ['https://*.argentum.ua','https://127.0.0.1']
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-6ij&xlb8(#e8e+lx+ximxh_w2*51m=$1j5+i_uk4f=#dmn)5ir"
 

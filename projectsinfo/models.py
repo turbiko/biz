@@ -27,6 +27,7 @@ class ProjectGenres(Orderable):
 
 
 class Project(Page):
+    template = 'projectsinfo\project.html'
     parent_page_types = ['Projects']
     subpage_types = ['ProjectNews']
     date = models.DateField(auto_now_add=False,  blank=True, null=True)
@@ -53,6 +54,7 @@ class Project(Page):
         ordering = ['date']
 
 class Projects(Page):
+    template = 'projectsinfo\projects.html'
     subpage_types = ['Project']
     parent_page_types = ['home.HomePage']
     page_description = "Projects index page"
@@ -60,9 +62,10 @@ class Projects(Page):
 
 class ProjectNews(Page):
     template = 'projectsinfo\project_news.html'
-    page_description = "current project news"
     parent_page_types = ['Project']
     subpage_types = []
+    page_description = "current project news"
+    # parent_prj = models.ForeignKey(Project, on_delete=models.PROTECT, null=True, default=None)
     author = models.ForeignKey(User, on_delete=models.PROTECT, null=True, default=None)
     article_date = models.DateField(verbose_name=_('Created'), auto_now_add=True,)
     description  = RichTextField(blank=True)
@@ -76,6 +79,7 @@ class ProjectNews(Page):
     )
 
     content_panels = Page.content_panels + [
+        # FieldPanel('parent_prj'),
         FieldPanel('author'),
         FieldPanel('description'),
         ImageChooserPanel('feature_image'),
@@ -83,5 +87,9 @@ class ProjectNews(Page):
 
 
 class ProjectAllNews(Page):
+    # template = 'projectsinfo\all_projects_news.html'
     parent_page_types = ['home.HomePage']
     subpage_types = []
+    page_description = "All projects news"
+    class Meta:
+        ordering = ['date']
