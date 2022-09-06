@@ -56,7 +56,7 @@
                                 <div class="text-center">
                                     <!-- News name-->
                                     <h5 class="fw-bolder">{{ proj_news.title|striptags|truncatechars:20 }}</h5>
-                                    {{ proj_news.body|striptags|truncatechars:40 }}...
+                                    {{ proj_news.specific.description|striptags|truncatechars:55 }}...
                                 </div>
                             </div>
                             <!-- News actions-->
