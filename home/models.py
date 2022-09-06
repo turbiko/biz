@@ -9,7 +9,7 @@ from wagtail.admin.edit_handlers import (
     ObjectList,
     TabbedInterface,
 )
-
+from projectsinfo.models import ProjectNews
 
 class HomePage(Page):
     seo_desctiption = models.CharField(_('SEO Description'), max_length=180, default='')
@@ -21,6 +21,7 @@ class HomePage(Page):
     def get_context(self, request): # https://stackoverflow.com/questions/32626815/wagtail-views-extra-context
         context = super(HomePage, self).get_context(request)
         context['proj'] = Page.get_children(self).live()  # Projects index page
+        context['proj_news'] = ProjectNews.objects.live()  # Projects index page
         return context
 
     class Meta:

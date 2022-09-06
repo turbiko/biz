@@ -24,8 +24,8 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Project name-->
-                                    <h5 class="fw-bolder">Project film</h5>
-                                    some text some text some text some text some text some text
+                                    <h5 class="fw-bolder">{{ project.title|striptags|truncatechars:20 }}</h5>
+                                    {{ project.body|striptags|truncatechars:40 }}...
                                 </div>
                             </div>
                             <!-- Product actions-->
@@ -44,8 +44,9 @@
         <section class="py-5"> News
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
-                    {% for p in self.get_children %} {% for project in p.get_children %}
+{% for p in self.get_children %}
+{% for f in p.get_children %}
+{% for proj_news in f.get_children %}
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- News image-->
@@ -54,17 +55,19 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- News name-->
-                                    <h5 class="fw-bolder">Project film</h5>
-                                    some text some text some text some text some text some text
+                                    <h5 class="fw-bolder">{{ proj_news.title|striptags|truncatechars:20 }}</h5>
+                                    {{ proj_news.body|striptags|truncatechars:40 }}...
                                 </div>
                             </div>
                             <!-- News actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ project.full_url }}">View details</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ proj_news.full_url }}">View details</a></div>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
 
 
                 </div>

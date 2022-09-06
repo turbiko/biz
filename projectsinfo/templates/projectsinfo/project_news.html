@@ -17,7 +17,7 @@
                         <div class="fs-5 mb-5">
                             <span>author {{ page.author.username }}</span>
                         </div>
-                        <p class="lead">{{ page.description|richtext }}</p>
+                        <p class="lead">{{ page.description|striptags|truncatechars:40 }}</p>
 
                     </div>
                 </div>
