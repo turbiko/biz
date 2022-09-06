@@ -56,6 +56,7 @@ class Project(Page):
 
 class Projects(Page):
     template = 'projectsinfo'+os.sep+'projects.html'
+    max_count = 1
     subpage_types = ['Project']
     parent_page_types = ['home.HomePage']
     page_description = "Projects index page"
@@ -63,6 +64,7 @@ class Projects(Page):
 
 class ProjectNews(Page):
     template = 'projectsinfo'+os.sep+'project_news.html'
+    max_count = 1
     parent_page_types = ['Project']
     subpage_types = []
     page_description = "current project news"
