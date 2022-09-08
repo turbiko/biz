@@ -48,9 +48,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     'django.contrib.sites',
     "django.contrib.staticfiles",
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     # added functionality
     'streams.apps.StreamsConfig',
     'menus.apps.MenusConfig',
