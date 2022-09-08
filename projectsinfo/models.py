@@ -50,6 +50,9 @@ class Project(Page):
                 heading="Genres",
         ),
     ]
+    def get_context(self, request): # https://stackoverflow.com/questions/32626815/wagtail-views-extra-context
+        context = super(Project, self).get_context(request)
+        return context
 
     class Meta:
         ordering = ['date']
@@ -68,7 +71,6 @@ class ProjectNews(Page):
     parent_page_types = ['Project']
     subpage_types = []
     page_description = "current project news"
-    # parent_prj = models.ForeignKey(Project, on_delete=models.PROTECT, null=True, default=None)
     author = models.ForeignKey(User, on_delete=models.PROTECT, null=True, default=None)
     article_date = models.DateField(verbose_name=_('Created'), auto_now_add=True,)
     description  = RichTextField(blank=True)
@@ -82,7 +84,6 @@ class ProjectNews(Page):
     )
 
     content_panels = Page.content_panels + [
-        # FieldPanel('parent_prj'),
         FieldPanel('author'),
         FieldPanel('description'),
         ImageChooserPanel('feature_image'),
@@ -90,7 +91,6 @@ class ProjectNews(Page):
 
 
 class ProjectAllNews(Page):
-    # template = 'projectsinfo\all_projects_news.html'
     parent_page_types = ['home.HomePage']
     subpage_types = []
     page_description = "All projects news"

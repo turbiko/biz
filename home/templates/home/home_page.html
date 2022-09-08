@@ -15,6 +15,45 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
+  {% comment %}
+    {% for proj in proj_news %}
+      {{ proj.url }}
+    {% endfor %}
+  {% endcomment %}
+                {# Only show pagination if there is more than one page to click through #}
+  {% if proj.paginator.num_pages > 1 %}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="pagination">
+            {% if posts.has_previous %}
+              <li class="page-item">
+                <a href="?page_proj={{ proj.previous_page_number }}" class="page-link">
+                  <span>&laquo;</span>
+                </a>
+              </li>
+            {% endif %}
+
+            {% for page_num in proj.paginator.page_range %}
+              <li class="page-item {% if page_num == proj.number %} active{% endif %}">
+                <a href="?page={{ page_num }}" class="page-link">
+                  {{ page_num }}
+                </a>
+              </li>
+            {% endfor %}
+
+            {% if posts.has_next %}
+              <li class="page-item">
+                <a href="?page={{ posts.next_page_number }}" class="page-link">
+                  <span>&raquo;</span>
+                </a>
+              </li>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
                     {% for p in self.get_children %} {% for project in p.get_children %}
                     <div class="col mb-5">
                         <div class="card h-100">

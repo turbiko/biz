@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailimages_tags  %}
 
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/project.css' %}"/>{% endblock extra_css %}
 
@@ -9,7 +9,10 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+
+                    <div class="col-md-6">
+                        {% image  page.specific.representative_image max-600x700 as tizer %}
+                        <img class="card-img-top mb-5 mb-md-0" src="{{ tizer.url }}" alt="..." /></div>
                     <div class="col-md-6">
                         <div class="small mb-1">Started: {{ page.date }}</div>
                         <h1 class="display-5 fw-bolder">{{ page.title }}</h1>
@@ -30,21 +33,26 @@
             </div>
         </section> <!-- END Project description section-->
 
+{% for news in self.get_children %}
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="https://b2b.film.ua/uploads/news_author/2017/7bc3b9c66963fdf10aab5a686e3cced9b22dabbb.jpg" class="img-fluid rounded-start" alt="...">
+        {% image  news.specific.feature_image original as tizer %}
+      <img src="{{ tizer.url }}" class="img-fluid rounded-start" alt="...">
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">News title</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget tellus sed augue efficitur efficitur. In quis lectus tortor. Sed nec magna at elit lacinia pellentesque. Suspendisse eget quam ex. Phasellus id est sit amet nisl dictum suscipit sit amet quis erat. Integer elit metus, suscipit sed sodales tempus, pretium vitae ligula. Pellentesque lacinia at libero nec fringilla. Pellentesque lacinia id mauris in dictum.</p>
-        <p class="card-text"><small class="text-muted">Last updated 5 mins ago</small></p>
+        <h5 class="card-title">{{ news.title }}</h5>
+        <p class="card-text">{{ news.specific.description|striptags|truncatechars:55 }}</p>
+        <p class="card-text">{{ news.specific.author.username|striptags|truncatechars:10 }}</p>
+        <p class="card-text"><small class="text-muted">{{ news.specific.article_date|timesince }} ago</small></p>
       </div>
     </div>
   </div>
 </div>
 
+    {% endfor %}
 
 
+<!-- end content -->
 {% endblock content %}

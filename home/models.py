@@ -1,6 +1,7 @@
 from django.db import models
 from django.template import context
 from django.utils.translation import activate, gettext_lazy as _
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, InlinePanel
@@ -18,10 +19,42 @@ class HomePage(Page):
     template = 'home/home_page.html'
     max_count = 1
 
-    def get_context(self, request): # https://stackoverflow.com/questions/32626815/wagtail-views-extra-context
+    def get_context(self, request):
+        # https://learnwagtail.com/tutorials/how-to-paginate-your-wagtail-pages/
+        # https://stackoverflow.com/questions/32626815/wagtail-views-extra-context
         context = super(HomePage, self).get_context(request)
-        context['proj'] = Page.get_children(self).live()  # Projects index page
-        context['proj_news'] = ProjectNews.objects.live()  # Projects index page
+        all_projects = Page.get_children(self).live()  # Projects index page
+        paginator_projects = Paginator(all_projects, 3)
+        page_prj = request.GET.get("page_proj")
+        try:
+            # If the page exists and the ?page=x is an int
+            projects_page = paginator_projects.page(page_prj)
+        except PageNotAnInteger:
+            # If the ?page=x is not an int; show the first page
+            projects_page = paginator_projects.page(1)
+        except EmptyPage:
+            # If the ?page=x is out of range (too high most likely)
+            # Then return the last page
+            projects_page = paginator_projects.page(paginator_projects.num_pages)
+        context['proj'] = projects_page
+
+        all_news = ProjectNews.objects.live()  # Projects index page
+        # Paginate all posts by 2 per page
+        paginator = Paginator(all_news, 3)
+        # Try to get the ?page=x value
+        page_news = request.GET.get("news")
+        try:
+            # If the page exists and the ?page=x is an int
+            news_posts = paginator.page(page_news)
+        except PageNotAnInteger:
+            # If the ?page=x is not an int; show the first page
+            news_posts = paginator.page(1)
+        except EmptyPage:
+            # If the ?page=x is out of range (too high most likely)
+            # Then return the last
+            news_posts = paginator.page(paginator.num_pages)
+
+        context['proj_news'] = news_posts
         return context
 
     class Meta:
