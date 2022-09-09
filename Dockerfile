@@ -22,4 +22,4 @@ RUN pip install -r requirements.txt
 
 # Postgres Entrypoint
 COPY entrypoint.sh /usr/src/app/entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+#ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
