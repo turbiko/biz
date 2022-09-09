@@ -17,6 +17,7 @@ RUN apk update \
 
 # Install python packages
 RUN pip install --upgrade pip
+RUN pip install "gunicorn==20.0.4"
 COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
