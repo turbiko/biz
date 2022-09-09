@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     "django.contrib.staticfiles",
     # added functionality
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'streams.apps.StreamsConfig',
     'menus.apps.MenusConfig',
     'projectsinfo',
@@ -188,3 +191,12 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_USERNAME_BLACKLIST = ["admin", "root"]
 ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+# Authentication Backends
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)

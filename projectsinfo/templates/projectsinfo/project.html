@@ -20,16 +20,15 @@
                             <span>Genres:{% for genre in page.project_genres.all %}{{ genre.genre.name }} {% if forloop.last %}  {% else %}, {% endif %}
     {% endfor %}</span>
                         </div>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget tellus sed augue efficitur efficitur. In quis lectus tortor. Sed nec magna at elit lacinia pellentesque. Suspendisse eget quam ex. Phasellus id est sit amet nisl dictum suscipit sit amet quis erat. Integer elit metus, suscipit sed sodales tempus, pretium vitae ligula. Pellentesque lacinia at libero nec fringilla. Pellentesque lacinia id mauris in dictum.</p>
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to cart
-                            </button>
-                        </div>
+                        <p class="lead">{{ page.specific.body | safe }}</p>
+
                     </div>
                 </div>
+            <div>Files:<br>{% for file in page.project_file.all %}
+                {{ file.prj_file.url }}<br>
+                {{ file.prj_file.description }}
+                {% if forloop.last %}  {% else %}<br> {% endif %}
+    {% endfor %}</div>
             </div>
         </section> <!-- END Project description section-->
 

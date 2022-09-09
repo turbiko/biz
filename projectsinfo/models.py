@@ -19,6 +19,7 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
+
 class ProjectGenres(Orderable):
     genre = models.ForeignKey(Genre, related_name='+', null=True, on_delete=models.SET_NULL)
     page = ParentalKey('projectsinfo.Project', related_name='project_genres')
@@ -27,10 +28,26 @@ class ProjectGenres(Orderable):
     ]
 
 
+def file_path(instance, filename):
+    basefilename, file_extension= os.path.splitext(filename)
+    project_filename= 'prj_file'
+    return 'projects/{project_filename}{ext}'.format( project_filename= project_filename, ext= file_extension)
+
+
+class ProjectFile(Orderable):
+    prj_file = models.FileField(upload_to=file_path, max_length=150)
+    page = ParentalKey('projectsinfo.Project', related_name='project_file')
+    description = models.CharField(max_length=250, null=True, blank=True)
+    panels = [
+        FieldPanel('prj_file'),
+        FieldPanel('description'),
+    ]
+
+
 class Project(Page):
     template = 'projectsinfo'+os.sep+'project.html'
     parent_page_types = ['Projects']
-    subpage_types = ['ProjectNews']
+    # subpage_types = ['ProjectNews']
     date = models.DateField(auto_now_add=False,  blank=True, null=True)
     representative_image = models.ForeignKey(
             'wagtailimages.Image',
@@ -48,6 +65,10 @@ class Project(Page):
         MultiFieldPanel(
                 [InlinePanel("project_genres",  label="Genre")],
                 heading="Genres",
+        ),
+        MultiFieldPanel(
+                [InlinePanel("project_file", label="Project file")],
+                heading="Files",
         ),
     ]
     def get_context(self, request): # https://stackoverflow.com/questions/32626815/wagtail-views-extra-context
