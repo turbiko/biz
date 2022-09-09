@@ -18,7 +18,8 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Project image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            {% image  project.specific.representative_image original as tizer %}
+                            <img class="card-img-top" src="{{ tizer.url }}" alt="{{ project.title}}" />
                             <!-- Project details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
