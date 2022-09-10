@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import activate, gettext_lazy as _
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList
 from wagtail.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
@@ -47,7 +47,7 @@ class ProjectFile(Orderable):
 class Project(Page):
     template = 'projectsinfo'+os.sep+'project.html'
     parent_page_types = ['Projects']
-    # subpage_types = ['ProjectNews']
+    subpage_types = ['ProjectNews']
     date = models.DateField(auto_now_add=False,  blank=True, null=True)
     representative_image = models.ForeignKey(
             'wagtailimages.Image',
@@ -66,11 +66,20 @@ class Project(Page):
                 [InlinePanel("project_genres",  label="Genre")],
                 heading="Genres",
         ),
+
+    ]
+    files_tab_panels = [
         MultiFieldPanel(
                 [InlinePanel("project_file", label="Project file")],
                 heading="Files",
         ),
     ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(content_panels, heading='Content'),
+        ObjectList(files_tab_panels, heading='Project files'),
+        ObjectList(Page.promote_panels, heading='Promote'),
+    ])
     def get_context(self, request): # https://stackoverflow.com/questions/32626815/wagtail-views-extra-context
         context = super(Project, self).get_context(request)
         return context

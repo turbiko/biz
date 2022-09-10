@@ -61,8 +61,7 @@ class HomePage(Page):
         verbose_name = "B2B main page"
 
     content_panels = Page.content_panels + [
-        FieldPanel('seo_desctiption'),
-        FieldPanel('seo_keywords'),
+
     ]
 
     search_fields = Page.search_fields + [
@@ -77,3 +76,8 @@ class HomePage(Page):
                 ObjectList(Page.settings_panels, heading=_('Page settings')),
             ]
     )
+
+    promote_panels = Page.promote_panels + [
+        FieldPanel('seo_desctiption'),
+        FieldPanel('seo_keywords'),
+    ]

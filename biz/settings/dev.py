@@ -24,8 +24,11 @@ DATABASES = {
         'PORT': os.environ.get("SQL_PORT"),
     }
 }
-
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# https://stackoverflow.com/questions/69490806/wagtail-formbuilder-submissions-are-not-sending-emails
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 try:
     from .local import *

@@ -26,7 +26,9 @@
                 </div>
             <div>Files:<br>
 {% for file in page.project_file.all %}
-    <img class="card-img-top mb-5 mb-md-0" src="{{ file.prj_file.url }}" alt="{{ file.description }}" />
+    <a target="_blank" href="{{ file.prj_file.url }}">
+    <img class="card-img-top mb-5 mb-md-0"  src="{{ file.prj_file.url }}" alt="{{ file.description }}" />
+    </a>
                 {% if forloop.last %}  {% else %}<br> {% endif %}
 {% endfor %}</div>
             </div>
@@ -42,9 +44,10 @@
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{{ news.title }}</h5>
+        <p class="card-text"><small class="text-muted">{{ news.specific.article_date|timesince }} ago</small></p>
         <p class="card-text">{{ news.specific.description|striptags|truncatechars:55 }}</p>
         <p class="card-text">{{ news.specific.author.username|striptags|truncatechars:10 }}</p>
-        <p class="card-text"><small class="text-muted">{{ news.specific.article_date|timesince }} ago</small></p>
+
       </div>
     </div>
   </div>
