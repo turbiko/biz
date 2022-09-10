@@ -44,9 +44,9 @@
         <section class="py-5"> News
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-{% for p in self.get_children.live %}
-{% for f in p.get_children.live %}
-{% for proj_news in f.get_children %}
+{% for p in self.get_children.live %} {# projects set if more than 1 #}
+{% for f in p.get_children.live %} {# project in projects list  #}
+{% for proj_news in f.get_children.live %} {# news in current project #}
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- News image-->
