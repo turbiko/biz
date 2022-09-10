@@ -97,7 +97,6 @@ class Projects(Page):
 
 class ProjectNews(Page):
     template = 'projectsinfo'+os.sep+'project_news.html'
-    max_count = 1
     parent_page_types = ['Project']
     subpage_types = []
     page_description = "current project news"
