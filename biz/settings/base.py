@@ -200,6 +200,10 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+ACCOUNT_ADAPTER = 'biz.adapter.CustomAccountAdapter'
+# A custom variable we created to tell the CustomAccountAdapter whether to
+# allow signups.
+ACCOUNT_ALLOW_SIGNUPS = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.argentum.ua'
