@@ -4,16 +4,27 @@
 <h2>{{self.title}}</h2>
 </div>
 
-<div class="block__media">
 
-    <div class="block__media_cell">
-        <div class="block__media_content">
-            {% for card in self.cards %}
-            {% image card.image max-274x174 as img %}
-        <div class="image_media"><a href="{{card.button_url}}" target="_blank"><img alt="" src="{{img.url}}" /> </a></div>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for card in self.cards %}
+        {% image card.image max-274x174 as img %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <a  target="_blank" href="{{img.url}}" >
+                <img src="{{img.url}}" width="100%" >
+            </a>
+            <div class="card-body">
+              <p class="card-text">{{ card.title }}</p>
+            </div>
+          </div>
         </div>
-        <div class="media_short white_link"><a class="white_link"  href="{{card.button_url}}" target="_blank">{{card.title}} </a></div>
         {% endfor %}
+
+
+        </div>
     </div>
 </div>
+
 <!-- =========== -->
