@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailimages_tags  %}
-
+{% load static wagtailimages_tags wagtailcore_tags %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/project.css' %}"/>{% endblock extra_css %}
 
 
@@ -55,6 +54,10 @@
 
     {% endfor %}
 
+        {# streams block for block__guiding #}
+        {% for block in page.content %}
+        {% include_block block %}
+        {% endfor %}
 
 <!-- end content -->
 {% endblock content %}

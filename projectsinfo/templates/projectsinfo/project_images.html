@@ -1,0 +1,18 @@
+{% load wagtailimages_tags %}
+<!-- =========== -->
+<div class="block__media_title font_sansh61 color_yellow">
+<h2>{{self.title}}</h2>
+</div>
+
+<div class="block__media">
+
+    <div class="block__media_cell">
+        <div class="block__media_content">
+            {% for card in self.cards %}
+            {% image card.image max-274x174 as img %}
+        <div class="image_media"><a href="{{card.button_url}}" target="_blank"><img alt="" src="{{img.url}}" /> </a></div>
+        </div>
+        <div class="media_short white_link"><a class="white_link"  href="{{card.button_url}}" target="_blank">{{card.title}} </a></div>
+    </div>
+</div>
+<!-- =========== -->

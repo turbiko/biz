@@ -5,10 +5,11 @@ from django.utils.translation import activate, gettext_lazy as _
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList
-from wagtail.fields import RichTextField
+from wagtail.fields import RichTextField, StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtail.models import Page, Orderable
+from . import blocks
 
 
 # Create your models here.
@@ -58,6 +59,13 @@ class Project(Page):
     )
     body = RichTextField(blank=True)
 
+    content = StreamField([
+        ("cards", blocks.ProjectImagesBlock()),
+    ],
+            null=True,
+            blank=True,
+    )
+
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('body'),
@@ -66,6 +74,7 @@ class Project(Page):
                 [InlinePanel("project_genres",  label="Genre")],
                 heading="Genres",
         ),
+        StreamFieldPanel("content"),
 
     ]
     files_tab_panels = [
@@ -123,4 +132,3 @@ class ProjectAllNews(Page):
     parent_page_types = ['home.HomePage']
     subpage_types = []
     page_description = "All projects news"
-
