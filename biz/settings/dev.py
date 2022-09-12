@@ -33,6 +33,8 @@ if DEBUG:
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+WAGTAILIMAGES_MAX_UPLOAD_SIZE = 15 * 1024 * 1024   # 15mb
+
 try:
     from .local import *
 except ImportError:
