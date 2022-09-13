@@ -47,13 +47,14 @@
     </div>
 </div>
 
-{% endfor %} {# streams block for block__guiding #}
-<div class="accordion accordion-flush" id="accordionFlush1">
-    {% for block in page.content %}
-<div class="accordion-item">
-        {% include_block block %}
-</div>
-    {% endfor %}
-</div>
+{% endfor %}
+    {# streams block for block__guiding for now disabled #}
+{#<div class="accordion accordion-flush" id="accordionFlush1">#}
+    {#   for block in page.content #}
+{#<div class="accordion-item">#}
+        {# include_block block #}
+{#</div>#}
+    {# endfor #}
+{#</div>#}
 <!-- end content -->
 {% endblock content %}

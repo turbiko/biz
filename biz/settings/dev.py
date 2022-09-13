@@ -4,7 +4,7 @@ import os
 SECRET_KEY = os.environ.get("SECRET_KEY", "@WTREGVw4tgthg536UJET7iujETYJ4e67ujET7ietyj")
 print("SECRET_KEY= ", SECRET_KEY)
 
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = os.environ.get("DEBUG", False)
 print('DEBUG=', DEBUG)
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
