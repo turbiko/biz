@@ -2,8 +2,9 @@ from .base import *
 import os
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "@WTREGVw4tgthg536UJET7iujETYJ4e67ujET7ietyj")
-DEBUG = os.environ.get("DEBUG", True)
+print("SECRET_KEY= ", SECRET_KEY)
 
+DEBUG = os.environ.get("DEBUG", True)
 print('DEBUG=', DEBUG)
 
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")

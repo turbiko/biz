@@ -1,30 +1,27 @@
 {% load wagtailimages_tags %}
+
 <!-- =========== -->
-<div class="block__media_title font_sansh61 color_yellow">
-<h2>{{self.title}}</h2>
-</div>
-
-
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for card in self.cards %}
-        {% image card.image max-274x174 as img %}
-        <div class="col">
-          <div class="card shadow-sm">
-            <a  target="_blank" href="{{img.url}}" >
-                <img src="{{img.url}}" width="100%" >
-            </a>
-            <div class="card-body">
-              <p class="card-text">{{ card.title }}</p>
+    <h2 class="accordion-header" id="flush-heading{{self.block_number}}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{self.block_number}}" aria-expanded="false" aria-controls="flush-collapse{{self.block_number}}">
+        {{self.block_number}}. {{self.title}}
+      </button>
+    </h2>
+    <div id="flush-collapse{{self.block_number}}" class="accordion-collapse collapse album py-5 bg-light" aria-labelledby="flush-heading{{self.block_number}}" data-bs-parent="#accordionFlush1">
+      <div class="accordion-body row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {% for card in self.cards %} {% image card.image max-274x174 as img %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <a target="_blank" href="{{img.url}}">
+                        <img src="{{img.url}}" width="100%">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text">{{ card.title }}</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        {% endfor %}
-
-
-        </div>
+            {% endfor %}
+      </div>
     </div>
-</div>
+
 
 <!-- =========== -->

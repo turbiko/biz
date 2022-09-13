@@ -3,7 +3,9 @@ from wagtail.core.templatetags.wagtailcore_tags import richtext
 from wagtail.images.blocks import ImageChooserBlock
 
 class ProjectImagesBlock(blocks.StructBlock):
+
     title = blocks.CharBlock(required=True, help_text="Add your title")
+    block_number = blocks.IntegerBlock(required=True)
     cards = blocks.ListBlock( blocks.StructBlock(
             [
                 ("image", ImageChooserBlock(required=True)),
