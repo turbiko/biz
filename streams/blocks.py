@@ -1,6 +1,7 @@
 from wagtail.core import blocks
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 
 class SocialBlock(blocks.StructBlock):
     """Cards with image and title and link."""

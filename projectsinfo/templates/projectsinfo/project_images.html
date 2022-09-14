@@ -9,17 +9,15 @@
     <div id="flush-collapse{{self.block_number}}" class="accordion-collapse collapse album py-5 bg-light" aria-labelledby="flush-heading{{self.block_number}}" data-bs-parent="#accordionFlush1">
       <div class="accordion-body row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           {% for card in self.cards %} {% image card.image max-274x174 as img %}
+              {{ card.url }}<br>
             <div class="col">
                 <div class="card shadow-sm">
-                    <a target="_blank" href="{{img.url}}">
-                        <img src="{{img.url}}" width="100%">
+                    <a target="_blank" href="{{img.url}}" alt="{{ card.title }}">
+                        {{img.url}}
                     </a>
-                    <div class="card-body">
-                        <p class="card-text">{{ card.title }}</p>
-                    </div>
                 </div>
             </div>
-            {% endfor %}
+          {% endfor %}
       </div>
     </div>
 

@@ -1,5 +1,7 @@
-{% extends "base.html" %} {% load static wagtailimages_tags wagtailcore_tags %} {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/project.css' %}" />{% endblock extra_css %} {% block content %}
+{% extends "base.html" %} {% load static wagtailimages_tags wagtailcore_tags %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/project.css' %}" />{% endblock extra_css %}
+{% block content %}
 <!-- Project description section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -7,12 +9,14 @@
 
             <div class="col-md-6">
                 {% image page.specific.representative_image max-600x700 as tizer %}
-                <img class="card-img-top mb-5 mb-md-0" src="{{ tizer.url }}" alt="{{ page.title }}" /></div>
+                <img class="card-img-top mb-5 mb-md-0" src="{{ tizer.url }}" alt="{{ page.title }}" />
+            </div>
             <div class="col-md-6">
                 <div class="small mb-1">Started: {{ page.date }}</div>
                 <h1 class="display-5 fw-bolder">{{ page.title }}</h1>
                 <div class="fs-5 mb-5">
-                    <span>Genres:{% for genre in page.project_genres.all %}{{ genre.genre.name }} {% if forloop.last %}  {% else %}, {% endif %}
+                    <span>Genres:{% for genre in page.project_genres.all %}{{ genre.genre.name }}
+                    {% if forloop.last %}<br>{% else %}, {% endif %}
     {% endfor %}</span>
                 </div>
                 <p class="lead">{{ page.specific.body | safe }}</p>
@@ -34,13 +38,11 @@
     <div class="row g-0">
         <div class="col-md-4">
             {% image news.specific.feature_image original as tizer %}
-            <img src="{{ tizer.url }}" class="img-fluid rounded-start" alt="{{ news.title }}">
+            <img src="{{ tizer.url }}" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <a href="{{ news.url }}">
                 <h5 class="card-title">{{ news.title }}</h5>
-                </a>
                 <p class="card-text"><small class="text-muted">{{ news.specific.article_date|timesince }} ago</small></p>
                 <p class="card-text">{{ news.specific.description|striptags|truncatechars:55 }}</p>
                 <p class="card-text">{{ news.specific.author.username|striptags|truncatechars:10 }}</p>
@@ -51,27 +53,13 @@
 </div>
 
 {% endfor %}
-
-{# Project Folders #}
-{% for folder in self.specific.files %}
-<div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-            {% image folder.specific.feature_image original as tizer %}
-            <img src="{{ tizer.url }}" class="img-fluid rounded-start" alt="{{ folder.title }}">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">{{ folder.title }}</h5>
-                <p class="card-text"><small class="text-muted">{{ folder.specific.article_date|timesince }} ago</small></p>
-                <p class="card-text">{{ folder.specific.description|striptags|truncatechars:55 }}</p>
-                <p class="card-text">{{ folder.specific.author.username|striptags|truncatechars:10 }}</p>
-
-            </div>
-        </div>
-    </div>
+    {# streams block for block__guiding for now disabled #}
+<div class="accordion accordion-flush" id="accordionFlush1">
+    {% for block in page.content  %}
+<div class="accordion-item">
+        {% include_block block %}
 </div>
-
-{% endfor %}
+    {% endfor %}
+</div>
 <!-- end content -->
 {% endblock content %}
