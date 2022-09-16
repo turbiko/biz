@@ -61,7 +61,6 @@ class HomePage(Page):
         verbose_name = "B2B main page"
 
     content_panels = Page.content_panels + [
-
     ]
 
     search_fields = Page.search_fields + [
